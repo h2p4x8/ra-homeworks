@@ -9,19 +9,21 @@ function MessageHistory({list = []}) {
     return null;
   }
 const history = list.map((message,mIndex) => {
+  let Type;
   switch(message.type) {
-  case 'message':
-    return <Message key={mIndex} from={message.from} message={message} />
-  break;
+    case 'message':
+      Type = Message
+    break;
 
-  case 'response':
-    return <Response key={mIndex} from={message.from} message={message} />
-  break;
+    case 'response':
+      Type = Response
+    break;
 
-  case 'typing':
-    return <Typing key={mIndex} from={message.from} message={message} />
-  break;
-}
+    case 'typing':
+      Type = Typing
+    break;
+  }
+  return <Type key={mIndex} from={message.from} message={message} />
 })
   return (
     <ul>
