@@ -1,7 +1,7 @@
 'use strict';
 
 function FeedbackForm({data, onSubmit}) {
-  let nameField, subField, messageField, emailField, snacksForm, salutationForm;
+  let nameField, subField, messageField, emailField, formContainer;
   const checkSnacks = (snackName) => {
     if (!data.snacks) {
       return;
@@ -17,23 +17,26 @@ function FeedbackForm({data, onSubmit}) {
 
   const saveForm = (event) => {
     event.preventDefault();
-    const snacks = Array.from(snacksForm.querySelectorAll('input[type=checkbox]:checked')).map(el => el.value)
     const form = {
-      salutation: salutationForm.querySelector('input[type=radio]:checked').value,
+      salutation: formContainer.salutation.value,
       name: nameField.value,
       subject: subField.value,
       message: messageField.value,
       email: emailField.value,
-      snacks: snacks
+      snacks: Array
+              .from(formContainer.snacks)
+              .filter(el => el.checked)
+              .map(el => el.value)
     }
     onSubmit(JSON.stringify(form));
   }
   return (
-    <form className="content__form contact-form">
+    <form className="content__form contact-form"
+          ref={element => formContainer = element}>
       <div className="testing">
         <p>Чем мы можем помочь?</p>
       </div>
-      <div className="contact-form__input-group" ref={element => salutationForm = element}>
+      <div className="contact-form__input-group">
       <input className="contact-form__input contact-form__input--radio" id="salutation-mr" name="salutation" type="radio" value="Мистер" defaultChecked={checkSalutation('Мистер')}/>
       <label className="contact-form__label contact-form__label--radio" for="salutation-mr">Мистер</label>
       <input className="contact-form__input contact-form__input--radio" id="salutation-mrs" name="salutation" type="radio" value="Мисис" defaultChecked={checkSalutation('Мисис')}/>
@@ -81,7 +84,7 @@ function FeedbackForm({data, onSubmit}) {
                   cols="65"
                   defaultValue={data.message}></textarea>
       </div>
-      <div className="contact-form__input-group" ref={element => snacksForm = element}>
+      <div className="contact-form__input-group">
         <p className="contact-form__label--checkbox-group">Хочу получить:</p>
         <input className="contact-form__input contact-form__input--checkbox" id="snacks-pizza" name="snacks" type="checkbox" value="пицца" defaultChecked={checkSnacks('пицца')}/>
         <label className="contact-form__label contact-form__label--checkbox" htmlFor="snacks-pizza">Пиццу</label>
