@@ -9,3 +9,12 @@ const DateInput = props => {
     </div>
   )
 };
+
+DateInput.propTypes = {
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
+}
+
+DateInput.defaultProps = {
+  value: new Date().toLocaleDateString()
+}
