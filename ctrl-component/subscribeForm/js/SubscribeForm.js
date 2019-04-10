@@ -7,14 +7,14 @@ class SubscribeForm extends React.Component {
   }
 
   checkEmail(e) {
-    let className = '';
+    /*let className = '';
 
     if (e.target.value !== '') {
       className = e.target.validity.valid ? 'is-valid' : 'is-error';
     }
-
+    */
     this.setState({
-      errorClass: className,
+      errorClass: e.target.validity.valid ? 'is-valid' : 'is-error',
       email: e.target.value
     })
   }
