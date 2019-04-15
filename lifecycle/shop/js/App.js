@@ -1,5 +1,5 @@
 class App extends React.Component {
-  
+
   constructor(props) {
     super(props);
 
@@ -52,4 +52,3 @@ class App extends React.Component {
     return !this.state.items.find(item => item.title === product.title);
   }
 }
-  
