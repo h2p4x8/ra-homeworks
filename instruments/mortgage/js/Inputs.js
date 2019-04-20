@@ -1,17 +1,14 @@
-const Inputs = () => (
+const {Input} = window.antd;
+const Inputs = (props) => (
   <div>
-    <label>
-      Стоимость: <input type="number" name="price" value="2000000"/> руб.
-    </label>
-    <br/>
-    <label>
-      На руках:
-      <input type="number" name="money" value="200000"/> руб.
-    </label>
-    <br/>
-    <label>
-      Срок кредита:
-      <input type="number" name="duration" value="5"/> лет.
-    </label>
+    <Form.Item label='Стоимость:' {...formItemLayout}>
+      <Input type='number' value="2000000" size='default'addonAfter='руб.'/>
+    </Form.Item>
+    <Form.Item label=' На руках:' {...formItemLayout}>
+      <Input type='number' value="200000" size='default' addonAfter='руб.'/>
+    </Form.Item>
+    <Form.Item label='Срок кредита:' {...formItemLayout}>
+      <Input type='number' value="5" size='default' addonAfter='руб.'/>
+    </Form.Item>
   </div>
 );
