@@ -35,6 +35,8 @@ class Site extends React.Component {
   generate() {
     const newId = makeid(random(5, 43, false));
 
+    alertify.log(`Новый ID: ${newId.length} ${declOfNum(newId.length)}`, null, 10000);
+
     this.setState(prevState => ({
       ids: [...prevState.ids, newId],
     }));
@@ -55,3 +57,9 @@ const makeid = (length = 12) => {
 const random = (lower = 0, upper = 1, floating = true) => floating
   ? Math.min(lower + (Math.random() * (upper - lower)), upper)
   : lower + Math.floor(Math.random() * (upper - lower + 1))
+
+function declOfNum(number) {
+    const titles = [ 'символ', 'символа', 'символов']
+    var cases = [2, 0, 1, 1, 1, 2];
+    return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];
+}

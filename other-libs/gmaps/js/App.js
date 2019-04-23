@@ -3,4 +3,3 @@ const App = () => (
     <Site />
   </main>
 );
-  
